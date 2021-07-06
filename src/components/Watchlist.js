@@ -16,7 +16,6 @@ class Watchlist extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.user);
     this.props.getWatchlistFilms(this.props.user && this.props.user._id);
   }
 

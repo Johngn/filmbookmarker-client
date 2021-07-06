@@ -54,14 +54,18 @@ export const addFilm = newFilm => dispatch => {
 export const getWatchlistFilms = userID => dispatch => {
   dispatch(setWatchlistLoading());
 
-  console.log(userID);
-
-  axios.get(`/api/films/${userID}`).then(res => {
-    dispatch({
-      type: GET_WATCHLIST,
-      payload: res.data,
+  axios
+    .get(`/api/films/${userID}`, {
+      headers: {
+        'x-auth-token': localStorage.getItem('token'),
+      },
+    })
+    .then(res => {
+      dispatch({
+        type: GET_WATCHLIST,
+        payload: res.data,
+      });
     });
-  });
 };
 
 export const sortWatchlistFilms = sortBy => dispatch => {
@@ -72,12 +76,18 @@ export const sortWatchlistFilms = sortBy => dispatch => {
 };
 
 export const deleteWatchlistFilm = filmId => dispatch => {
-  axios.delete(`/api/films/${filmId}`).then(
-    () =>
-      dispatch({
-        type: DELETE_FILM,
-        payload: filmId,
-      }),
-    dispatch(setAlert('Film removed from watchlist', 'success'))
-  );
+  axios
+    .delete(`/api/films/${filmId}`, {
+      headers: {
+        'x-auth-token': localStorage.getItem('token'),
+      },
+    })
+    .then(
+      () =>
+        dispatch({
+          type: DELETE_FILM,
+          payload: filmId,
+        }),
+      dispatch(setAlert('Film removed from watchlist', 'success'))
+    );
 };
