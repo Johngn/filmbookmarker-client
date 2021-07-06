@@ -30,7 +30,12 @@ export const setAlert = (msg, alertType) => dispatch => {
 
 export const addFilm = newFilm => dispatch => {
   axios
-    .post('/api/films', newFilm)
+    .post('/api/films', newFilm, {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
+      },
+    })
     .then(res => {
       if (res.status === 200) {
         dispatch(
