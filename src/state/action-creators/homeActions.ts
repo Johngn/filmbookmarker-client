@@ -1,13 +1,13 @@
-import { DEFAULT_FILMS, SEARCH_FILM, HOME_LOADING } from './types';
+import { ActionType } from '../action-types';
 import axios from 'axios';
 
 export const setHomeLoading = () => {
   return {
-    type: HOME_LOADING,
+    type: ActionType.HOME_LOADING,
   };
 };
 
-export const getDefaultFilms = () => async dispatch => {
+export const getDefaultFilms = () => async (dispatch: any) => {
   dispatch(setHomeLoading());
 
   const token = axios.defaults.headers.common['x-auth-token'];
@@ -20,12 +20,12 @@ export const getDefaultFilms = () => async dispatch => {
   axios.defaults.headers.common['x-auth-token'] = token;
 
   dispatch({
-    type: DEFAULT_FILMS,
+    type: ActionType.DEFAULT_FILMS,
     payload: res.data.results,
   });
 };
 
-export const searchFilm = searchTerm => async dispatch => {
+export const searchFilm = (searchTerm: string) => async (dispatch: any) => {
   dispatch(setHomeLoading());
 
   const token = axios.defaults.headers.common['x-auth-token'];
@@ -38,7 +38,7 @@ export const searchFilm = searchTerm => async dispatch => {
   axios.defaults.headers.common['x-auth-token'] = token;
 
   dispatch({
-    type: SEARCH_FILM,
+    type: ActionType.SEARCH_FILM,
     payload: res.data.results,
   });
 };

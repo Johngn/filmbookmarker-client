@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/actions/authActions';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { useActions } from '../hooks/useActions';
 
 const Navbar = () => {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  const dispatch = useDispatch();
+  const isAuthenticated = useTypedSelector(state => state.auth.isAuthenticated);
+
+  const { logout } = useActions();
 
   return (
     <header>
@@ -24,7 +25,7 @@ const Navbar = () => {
 
         {isAuthenticated ? (
           <div>
-            <button onClick={dispatch(logout)} className="navbar-logout">
+            <button onClick={logout} className="navbar-logout">
               Logout
             </button>
           </div>

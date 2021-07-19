@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react';
-import {
-  getWatchlistFilms,
-  sortWatchlistFilms,
-} from '../redux/actions/watchlistActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 import WatchlistFilm from './WatchlistFilm';
 import Spinner from './Spinner';
 import classNames from 'classnames';
+import { useActions } from '../hooks/useActions';
 
 const Watchlist = () => {
   const [sortedByTitle, setSortedByTitle] = useState(false);
   const [sortedByYear, setSortedByYear] = useState(false);
 
-  const watchlist = useSelector(state => state.watchlist);
-  const user = useSelector(state => state.auth.user);
+  const watchlist = useTypedSelector(state => state.watchlist);
+  const user = useTypedSelector(state => state.auth.user);
 
-  const dispatch = useDispatch();
+  const { getWatchlistFilms, sortWatchlistFilms } = useActions();
 
   useEffect(() => {
-    dispatch(getWatchlistFilms(user && user._id));
-  }, [user, dispatch]);
+    getWatchlistFilms(user && user._id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const sortWatchlistFilmsComponent = e => {
-    if (e.target.name === 'title') {
+  const sortWatchlistFilmsComponent = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (event.currentTarget.name === 'title') {
       setSortedByTitle(true);
       setSortedByYear(false);
     } else {
@@ -30,7 +30,7 @@ const Watchlist = () => {
       setSortedByYear(true);
     }
 
-    dispatch(sortWatchlistFilms(e.target.name));
+    sortWatchlistFilms(event.currentTarget.name);
   };
 
   const films = watchlist.films;
@@ -64,8 +64,15 @@ const Watchlist = () => {
         <Spinner />
       ) : films.length > 0 ? (
         <ul className="watchlist">
-          {films.map((film, i) => (
-            <WatchlistFilm film={film} key={i} />
+          {films.map((film: any, i: number) => (
+            <WatchlistFilm
+              _id={film._id}
+              overview={film.overview}
+              title={film.title}
+              year={film.year}
+              poster_path={film.poster_path}
+              key={i}
+            />
           ))}
         </ul>
       ) : (

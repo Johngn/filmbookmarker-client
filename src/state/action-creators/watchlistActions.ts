@@ -1,34 +1,29 @@
-import {
-  ADD_FILM,
-  WATCHLIST_LOADING,
-  GET_WATCHLIST,
-  DELETE_FILM,
-  SET_ALERT,
-  REMOVE_ALERT,
-  SORT_WATCHLIST_FILMS,
-} from './types';
+import { ActionType } from '../action-types';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
 // import { loadUser } from ".//authActions";
 
 export const setWatchlistLoading = () => {
   return {
-    type: WATCHLIST_LOADING,
+    type: ActionType.WATCHLIST_LOADING,
   };
 };
 
-export const setAlert = (msg, alertType) => dispatch => {
+export const setAlert = (msg: string, alertType: string) => (dispatch: any) => {
   const id = uuid();
 
   dispatch({
-    type: SET_ALERT,
+    type: ActionType.SET_ALERT,
     payload: { msg, alertType, id },
   });
 
-  setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), 1000);
+  setTimeout(
+    () => dispatch({ type: ActionType.REMOVE_ALERT, payload: id }),
+    1000
+  );
 };
 
-export const addFilm = newFilm => dispatch => {
+export const addFilm = (newFilm: any) => (dispatch: any) => {
   axios
     .post('/api/films', newFilm, {
       headers: {
@@ -40,7 +35,7 @@ export const addFilm = newFilm => dispatch => {
       if (res.status === 200) {
         dispatch(
           {
-            type: ADD_FILM,
+            type: ActionType.ADD_FILM,
           },
           dispatch(setAlert('Film added to watchlist', 'success'))
         );
@@ -51,7 +46,7 @@ export const addFilm = newFilm => dispatch => {
     });
 };
 
-export const getWatchlistFilms = userID => dispatch => {
+export const getWatchlistFilms = (userID: any) => (dispatch: any) => {
   dispatch(setWatchlistLoading());
 
   axios
@@ -62,20 +57,20 @@ export const getWatchlistFilms = userID => dispatch => {
     })
     .then(res => {
       dispatch({
-        type: GET_WATCHLIST,
+        type: ActionType.GET_WATCHLIST,
         payload: res.data,
       });
     });
 };
 
-export const sortWatchlistFilms = sortBy => dispatch => {
+export const sortWatchlistFilms = (sortBy: any) => (dispatch: any) => {
   dispatch({
-    type: SORT_WATCHLIST_FILMS,
+    type: ActionType.SORT_WATCHLIST_FILMS,
     payload: sortBy,
   });
 };
 
-export const deleteWatchlistFilm = filmId => dispatch => {
+export const deleteWatchlistFilm = (filmId: any) => (dispatch: any) => {
   axios
     .delete(`/api/films/${filmId}`, {
       headers: {
@@ -85,7 +80,7 @@ export const deleteWatchlistFilm = filmId => dispatch => {
     .then(
       () =>
         dispatch({
-          type: DELETE_FILM,
+          type: ActionType.DELETE_FILM,
           payload: filmId,
         }),
       dispatch(setAlert('Film removed from watchlist', 'success'))

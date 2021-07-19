@@ -1,12 +1,23 @@
-import { useDispatch } from 'react-redux';
-import { addFilm } from '../redux/actions/watchlistActions';
+import { useActions } from '../hooks/useActions';
 
-const FilmCard = ({ film }) => {
-  const dispatch = useDispatch();
+interface FilmCardProps {
+  title: string;
+  id: string;
+  release_date: string;
+  poster_path: string;
+  overview: string;
+}
 
-  const { title, id, overview, poster_path, release_date } = film;
+const FilmCard = ({
+  title,
+  id,
+  overview,
+  poster_path,
+  release_date,
+}: FilmCardProps) => {
+  const { addFilm } = useActions();
 
-  const addToList = e => {
+  const addToList = (e: any) => {
     e.preventDefault();
 
     const newFilm = {
@@ -17,7 +28,7 @@ const FilmCard = ({ film }) => {
       poster_path,
     };
 
-    dispatch(addFilm(newFilm));
+    addFilm(newFilm);
   };
 
   return (

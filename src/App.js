@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './state/store';
 import './App.css';
 import Navbar from './components/Navbar';
 import Search from './components/Search';
@@ -8,9 +8,9 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/Alert';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './components/routing/PrivateRoute';
 // import { loadUser } from './redux/actions/authActions';
 // import setAuthToken from './utils/setAuthToken';
-import PrivateRoute from './components/routing/PrivateRoute';
 
 const App = () => {
   return (

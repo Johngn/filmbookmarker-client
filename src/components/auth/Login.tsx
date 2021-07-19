@@ -1,26 +1,21 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../redux/actions/authActions';
-import './register.css';
-import { setAlert } from '../../redux/actions/watchlistActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import './login.css';
 import { Redirect } from 'react-router-dom';
+import { useActions } from '../../hooks/useActions';
 
-const Register = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-  const dispatch = useDispatch();
+  const { loginUser } = useActions();
 
-  const registerUserHandler = e => {
+  const isAuthenticated = useTypedSelector(state => state.auth.isAuthenticated);
+
+  const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (password !== password2) {
-      dispatch(setAlert('Passwords do not match', 'failure'));
-    } else {
-      dispatch(registerUser({ email, password }));
-    }
+    loginUser({ email, password });
   };
 
   if (isAuthenticated) {
@@ -29,8 +24,8 @@ const Register = () => {
 
   return (
     <div className="register-form-container">
-      <h3 className="register-form-header">Register</h3>
-      <form onSubmit={registerUserHandler} className="register-form">
+      <h3 className="register-form-header">Login</h3>
+      <form onSubmit={loginUserHandler} className="register-form">
         <div className="register-form-item">
           <label className="register-form-label">Email:</label>
           <input
@@ -52,16 +47,6 @@ const Register = () => {
           ></input>
         </div>
         <div className="register-form-item">
-          <label className="register-form-label">Confirm Password:</label>
-          <input
-            name="password2"
-            value={password2}
-            onChange={e => setPassword2(e.target.value)}
-            className="register-form-input"
-            type="password"
-          ></input>
-        </div>
-        <div className="register-form-item">
           <button className="register-form-button">Submit</button>
         </div>
       </form>
@@ -69,4 +54,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

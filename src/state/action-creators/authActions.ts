@@ -1,18 +1,10 @@
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGOUT,
-} from './types';
+import { ActionType } from '../action-types';
 import { setAlert } from './watchlistActions';
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 
 // Load user
-export const loadUser = () => async dispatch => {
+export const loadUser = () => async (dispatch: any) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -21,19 +13,24 @@ export const loadUser = () => async dispatch => {
     const res = await axios.get('/api/auth');
 
     dispatch({
-      type: USER_LOADED,
+      type: ActionType.USER_LOADED,
       payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: AUTH_ERROR,
+      type: ActionType.AUTH_ERROR,
     });
   }
 };
 
+interface UserProps {
+  email: string;
+  password: string;
+}
+
 export const registerUser =
-  ({ email, password }) =>
-  async dispatch => {
+  ({ email, password }: UserProps) =>
+  async (dispatch: any) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -46,27 +43,29 @@ export const registerUser =
       const res = await axios.post('/api/users', body, config);
 
       dispatch({
-        type: REGISTER_SUCCESS,
+        type: ActionType.REGISTER_SUCCESS,
         payload: res.data,
       });
 
       dispatch(loadUser());
-    } catch (err) {
+    } catch (err: any) {
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach(error => dispatch(setAlert(error.msg, 'failure')));
+        errors.forEach((error: any) =>
+          dispatch(setAlert(error.msg, 'failure'))
+        );
       }
 
       dispatch({
-        type: REGISTER_FAIL,
+        type: ActionType.REGISTER_FAIL,
       });
     }
   };
 
 export const loginUser =
-  ({ email, password }) =>
-  async dispatch => {
+  ({ email, password }: UserProps) =>
+  async (dispatch: any) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -79,26 +78,28 @@ export const loginUser =
       const res = await axios.post('/api/auth', body, config);
 
       dispatch({
-        type: LOGIN_SUCCESS,
+        type: ActionType.LOGIN_SUCCESS,
         payload: res.data,
       });
 
       dispatch(loadUser());
-    } catch (err) {
+    } catch (err: any) {
       const errors = err.response.data.errors;
 
       if (errors) {
-        errors.forEach(error => dispatch(setAlert(error.msg, 'failure')));
+        errors.forEach((error: any) =>
+          dispatch(setAlert(error.msg, 'failure'))
+        );
       }
 
       dispatch({
-        type: LOGIN_FAIL,
+        type: ActionType.LOGIN_FAIL,
       });
     }
   };
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch: any) => {
   dispatch({
-    type: LOGOUT,
+    type: ActionType.LOGOUT,
   });
 };

@@ -1,13 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 import classNames from 'classnames';
 
-const Alert = () => {
-  const alerts = useSelector(state => state.alert);
+const Alert: React.FC = () => {
+  const alerts = useTypedSelector(state => state.alert);
+
+  interface AlertType {
+    alertType: string;
+    id: number;
+    msg: string;
+  }
 
   return (
     alerts !== null &&
     alerts.length > 0 &&
-    alerts.map(alert => (
+    alerts.map((alert: AlertType) => (
       <div
         className={classNames('alert', {
           red: alert.alertType === 'failure',

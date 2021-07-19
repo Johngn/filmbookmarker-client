@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+const PrivateRoute = ({ component: Component, ...rest }: any) => {
+  const isAuthenticated = useTypedSelector(state => state.auth.isAuthenticated);
 
   return (
     <Route

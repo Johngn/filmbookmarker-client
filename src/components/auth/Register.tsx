@@ -1,20 +1,25 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../redux/actions/authActions';
-import './login.css';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import './register.css';
 import { Redirect } from 'react-router-dom';
+import { useActions } from '../../hooks/useActions';
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
+  const [password2, setPassword2] = useState('');
+  const isAuthenticated = useTypedSelector(state => state.auth.isAuthenticated);
 
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const { registerUser, setAlert } = useActions();
 
-  const loginUserHandler = e => {
+  const registerUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(loginUser({ email, password }));
+    if (password !== password2) {
+      setAlert('Passwords do not match', 'failure');
+    } else {
+      registerUser({ email, password });
+    }
   };
 
   if (isAuthenticated) {
@@ -23,8 +28,8 @@ const Login = () => {
 
   return (
     <div className="register-form-container">
-      <h3 className="register-form-header">Login</h3>
-      <form onSubmit={loginUserHandler} className="register-form">
+      <h3 className="register-form-header">Register</h3>
+      <form onSubmit={registerUserHandler} className="register-form">
         <div className="register-form-item">
           <label className="register-form-label">Email:</label>
           <input
@@ -46,6 +51,16 @@ const Login = () => {
           ></input>
         </div>
         <div className="register-form-item">
+          <label className="register-form-label">Confirm Password:</label>
+          <input
+            name="password2"
+            value={password2}
+            onChange={e => setPassword2(e.target.value)}
+            className="register-form-input"
+            type="password"
+          ></input>
+        </div>
+        <div className="register-form-item">
           <button className="register-form-button">Submit</button>
         </div>
       </form>
@@ -53,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

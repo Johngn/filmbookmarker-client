@@ -1,18 +1,31 @@
 import { useState } from 'react';
-import { deleteWatchlistFilm } from '../redux/actions/watchlistActions';
-import { useDispatch } from 'react-redux';
+import { useActions } from '../hooks/useActions';
 
-const WatchlistFilm = ({ film }) => {
+interface FilmCardProps {
+  title: string;
+  _id: string;
+  year: string;
+  poster_path: string;
+  overview: string;
+}
+
+const WatchlistFilm = ({
+  title,
+  year,
+  overview,
+  poster_path,
+  _id,
+}: FilmCardProps) => {
   const [overviewVisible, setOverviewVisible] = useState(false);
 
-  const dispatch = useDispatch();
+  const { deleteWatchlistFilm } = useActions();
 
-  const deleteWatchlistFilmHandler = e => {
+  const deleteWatchlistFilmHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     setOverviewVisible(false);
-    dispatch(deleteWatchlistFilm(e.target.value));
+    deleteWatchlistFilm(e.currentTarget.value);
   };
-
-  const { title, year, overview, poster_path, _id } = film;
 
   return (
     <li className="watchlist-list-item">

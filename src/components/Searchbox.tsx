@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { searchFilm } from '../redux/actions/homeActions';
+import { useActions } from '../hooks/useActions';
 
 const Searchbox = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const dispatch = useDispatch();
+  const { searchFilm } = useActions();
 
-  const handleChange = e => {
-    setSearchTerm(e.target.value);
-    if (e.target.value !== '') {
-      dispatch(searchFilm(e.target.value));
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearchTerm(e.currentTarget.value);
+    if (e.currentTarget.value !== '') {
+      searchFilm(e.currentTarget.value);
     }
   };
 
