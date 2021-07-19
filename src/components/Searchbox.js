@@ -1,49 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { searchFilm } from '../redux/actions/homeActions';
 
-class Searchbox extends Component {
-    state = {
-        searchTerm: '',
-    };
+const Searchbox = () => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-    handleChange = e => {
-        this.setState({ searchTerm: e.target.value });
-        if (e.target.value !== '') {
-            this.props.searchFilm(e.target.value);
-        }
-    };
+  const dispatch = useDispatch();
 
-    handleSubmit = e => {
-        e.preventDefault();
-
-        this.props.searchFilm(this.state.searchTerm);
-    };
-
-    render() {
-        return (
-            <div className="form-container">
-                <form onSubmit={this.handleSubmit} className="form">
-                    <input
-                        type="text"
-                        id="search"
-                        className="search"
-                        placeholder="Enter name of film"
-                        value={this.state.searchTerm}
-                        onChange={this.handleChange}
-                    />
-                    {/* <input
-                        className="search-button"
-                        type="submit"
-                        value="Search"
-                    /> */}
-                </form>
-            </div>
-        );
+  const handleChange = e => {
+    setSearchTerm(e.target.value);
+    if (e.target.value !== '') {
+      dispatch(searchFilm(e.target.value));
     }
-}
+  };
 
-Searchbox.propTypes = { searchFilm: PropTypes.func.isRequired };
+  return (
+    <div className="form-container">
+      <form className="form">
+        <input
+          type="text"
+          id="search"
+          className="search"
+          placeholder="Enter name of film"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </form>
+    </div>
+  );
+};
 
-export default connect(null, { searchFilm })(Searchbox);
+export default Searchbox;

@@ -1,74 +1,56 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { loginUser, logout } from '../../redux/actions/authActions';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../redux/actions/authActions';
 import './login.css';
 import { Redirect } from 'react-router-dom';
 
-class Login extends Component {
-    state = {
-        email: '',
-        password: '',
-    };
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-    inputChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-    loginUser = e => {
-        e.preventDefault();
+  const loginUserHandler = e => {
+    e.preventDefault();
 
-        const { email, password } = this.state;
+    dispatch(loginUser({ email, password }));
+  };
 
-        this.props.loginUser({ email, password });
-    };
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
-    render() {
-        if (this.props.isAuthenticated) {
-            return <Redirect to="/" />;
-        }
-
-        return (
-            <div className="register-form-container">
-                <h3 className="register-form-header">Login</h3>
-                <form onSubmit={this.loginUser} className="register-form">
-                    <div className="register-form-item">
-                        <label className="register-form-label">Email:</label>
-                        <input
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.inputChange}
-                            className="register-form-input"
-                            type="text"
-                        ></input>
-                    </div>
-                    <div className="register-form-item">
-                        <label className="register-form-label">Password:</label>
-                        <input
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.inputChange}
-                            className="register-form-input"
-                            type="password"
-                        ></input>
-                    </div>
-                    <div className="register-form-item">
-                        <button className="register-form-button">Submit</button>
-                    </div>
-                </form>
-            </div>
-        );
-    }
-}
-
-Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
+  return (
+    <div className="register-form-container">
+      <h3 className="register-form-header">Login</h3>
+      <form onSubmit={loginUserHandler} className="register-form">
+        <div className="register-form-item">
+          <label className="register-form-label">Email:</label>
+          <input
+            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className="register-form-input"
+            type="text"
+          ></input>
+        </div>
+        <div className="register-form-item">
+          <label className="register-form-label">Password:</label>
+          <input
+            name="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            className="register-form-input"
+            type="password"
+          ></input>
+        </div>
+        <div className="register-form-item">
+          <button className="register-form-button">Submit</button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { loginUser, logout })(Login);
+export default Login;

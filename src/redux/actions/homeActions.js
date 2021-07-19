@@ -14,7 +14,7 @@ export const getDefaultFilms = () => async dispatch => {
   delete axios.defaults.headers.common['x-auth-token']; // This stops CORS error
 
   const res = await axios.get(
-    `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=0b94b1025e86742975b86c5a81513b54`
+    `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}`
   );
 
   axios.defaults.headers.common['x-auth-token'] = token;
@@ -32,7 +32,7 @@ export const searchFilm = searchTerm => async dispatch => {
   delete axios.defaults.headers.common['x-auth-token']; // This stops CORS error
 
   const res = await axios.get(
-    `https://api.themoviedb.org/3/search/movie?api_key=0b94b1025e86742975b86c5a81513b54&query="${searchTerm}"`
+    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query="${searchTerm}"`
   );
 
   axios.defaults.headers.common['x-auth-token'] = token;
