@@ -2,35 +2,39 @@ import { ActionType } from '../action-types';
 import { setAlert } from './watchlistActions';
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
+import { AuthActions } from '../actions';
+import { Dispatch } from 'redux';
 
 // Load user
-export const loadUser = () => async (dispatch: any) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
+export const loadUser = (): any => {
+  return async (dispatch: Dispatch<AuthActions>) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
 
-  try {
-    const res = await axios.get('/api/auth');
+    try {
+      const res = await axios.get('/api/auth');
 
-    dispatch({
-      type: ActionType.USER_LOADED,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: ActionType.AUTH_ERROR,
-    });
-  }
+      dispatch({
+        type: ActionType.USER_LOADED,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: ActionType.AUTH_ERROR,
+      });
+    }
+  };
 };
 
-interface UserProps {
+export const registerUser = ({
+  email,
+  password,
+}: {
   email: string;
   password: string;
-}
-
-export const registerUser =
-  ({ email, password }: UserProps) =>
-  async (dispatch: any) => {
+}) => {
+  return async (dispatch: Dispatch<AuthActions>) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -48,8 +52,8 @@ export const registerUser =
       });
 
       dispatch(loadUser());
-    } catch (err: any) {
-      const errors = err.response.data.errors;
+    } catch (error: any) {
+      const errors = error.response.data.errors;
 
       if (errors) {
         errors.forEach((error: any) =>
@@ -62,10 +66,16 @@ export const registerUser =
       });
     }
   };
+};
 
-export const loginUser =
-  ({ email, password }: UserProps) =>
-  async (dispatch: any) => {
+export const loginUser = ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  return async (dispatch: Dispatch<AuthActions>) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -83,8 +93,8 @@ export const loginUser =
       });
 
       dispatch(loadUser());
-    } catch (err: any) {
-      const errors = err.response.data.errors;
+    } catch (error: any) {
+      const errors = error.response.data.errors;
 
       if (errors) {
         errors.forEach((error: any) =>
@@ -97,9 +107,12 @@ export const loginUser =
       });
     }
   };
+};
 
-export const logout = () => (dispatch: any) => {
-  dispatch({
-    type: ActionType.LOGOUT,
-  });
+export const logout = () => {
+  return (dispatch: Dispatch<AuthActions>) => {
+    dispatch({
+      type: ActionType.LOGOUT,
+    });
+  };
 };

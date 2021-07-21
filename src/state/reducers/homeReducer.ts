@@ -1,19 +1,17 @@
 import { ActionType } from '../action-types';
+import { HomeActions } from '../actions';
 
 interface HomeState {
   loading: boolean;
   films: any;
 }
 
-const initialState = {
+const initialState: HomeState = {
   loading: false,
   films: [],
 };
 
-const homeReducer = (
-  state: HomeState = initialState,
-  action: any
-): HomeState => {
+const homeReducer = (state = initialState, action: HomeActions): HomeState => {
   switch (action.type) {
     case ActionType.DEFAULT_FILMS:
       return {
