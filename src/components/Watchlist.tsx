@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import WatchlistFilm from './WatchlistFilm';
 import Spinner from './Spinner';
@@ -6,32 +6,16 @@ import classNames from 'classnames';
 import { useActions } from '../hooks/useActions';
 
 const Watchlist = () => {
-  const [sortedByTitle, setSortedByTitle] = useState(false);
-  const [sortedByYear, setSortedByYear] = useState(false);
-
   const watchlist = useTypedSelector(state => state.watchlist);
   const user = useTypedSelector(state => state.auth.user);
 
-  const { getWatchlistFilms, sortWatchlistFilms } = useActions();
+  const { getWatchlistFilms, sortByYear, sortByTitle, sortByDuration } =
+    useActions();
 
   useEffect(() => {
     getWatchlistFilms(user && user._id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const sortWatchlistFilmsComponent = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    if (event.currentTarget.name === 'title') {
-      setSortedByTitle(true);
-      setSortedByYear(false);
-    } else {
-      setSortedByTitle(false);
-      setSortedByYear(true);
-    }
-
-    sortWatchlistFilms(event.currentTarget.name);
-  };
 
   const films = watchlist.films;
 
@@ -45,23 +29,33 @@ const Watchlist = () => {
         <div>
           <button
             className={classNames(
-              { 'watchlist-button-pressed': sortedByYear },
+              { 'watchlist-button-pressed': watchlist.sortedByTitle },
+              'watchlist-button'
+            )}
+            name="title"
+            onClick={sortByTitle}
+          >
+            Sort by title
+          </button>
+          <button
+            className={classNames(
+              { 'watchlist-button-pressed': watchlist.sortedByYear },
               'watchlist-button'
             )}
             name="year"
-            onClick={sortWatchlistFilmsComponent}
+            onClick={sortByYear}
           >
             Sort by year
           </button>
           <button
             className={classNames(
-              { 'watchlist-button-pressed': sortedByTitle },
+              { 'watchlist-button-pressed': watchlist.sortedByDuration },
               'watchlist-button'
             )}
-            name="title"
-            onClick={sortWatchlistFilmsComponent}
+            name="year"
+            onClick={sortByDuration}
           >
-            Sort by title
+            Sort by duration
           </button>
         </div>
       </div>
@@ -69,14 +63,15 @@ const Watchlist = () => {
         <Spinner />
       ) : films.length > 0 ? (
         <ul className="watchlist">
-          {films.map((film: any, i: number) => (
+          {films.map((film: any) => (
             <WatchlistFilm
               _id={film._id}
               overview={film.overview}
               title={film.title}
               year={film.year}
               poster_path={film.poster_path}
-              key={i}
+              runtime={film.runtime}
+              key={film._id}
             />
           ))}
         </ul>

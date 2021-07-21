@@ -18,7 +18,7 @@ interface AuthState {
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
-  loading: true,
+  loading: false,
   user: {
     _id: '',
     email: '',
@@ -61,6 +61,13 @@ const authReducer = (
         token: null,
         isAuthenticated: false,
         loading: false,
+        user: {
+          _id: '',
+          email: '',
+          date: '',
+          __v: 0,
+          films: [],
+        },
       };
     default:
       return state;

@@ -29,24 +29,39 @@ export const setAlert = (msg: string, alertType: string): any => {
 
 export const addFilm = (newFilm: any) => {
   return (dispatch: Dispatch<WatchlistActions>) => {
+    console.log(newFilm.id);
+
+    const token = axios.defaults.headers.common['x-auth-token'];
+    delete axios.defaults.headers.common['x-auth-token']; // This stops CORS error
+
     axios
-      .post('/api/films', newFilm, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': localStorage.getItem('token'),
-        },
-      })
-      .then(res => {
-        if (res.status === 200) {
-          dispatch({
-            type: ActionType.ADD_FILM,
+      .get(
+        `https://api.themoviedb.org/3/movie/${newFilm.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US`
+      )
+      .then(response => {
+        newFilm.runtime = response.data.runtime;
+
+        axios
+          .post('/api/films', newFilm, {
+            headers: {
+              'Content-Type': 'application/json',
+              'x-auth-token': localStorage.getItem('token'),
+            },
+          })
+          .then(res => {
+            if (res.status === 200) {
+              dispatch({
+                type: ActionType.ADD_FILM,
+              });
+              dispatch(setAlert('Film added to watchlist', 'success'));
+            }
+          })
+          .catch(() => {
+            dispatch(setAlert('Film already on watchlist', 'failure'));
           });
-          dispatch(setAlert('Film added to watchlist', 'success'));
-        }
-      })
-      .catch(() => {
-        dispatch(setAlert('Film already on watchlist', 'failure'));
       });
+
+    axios.defaults.headers.common['x-auth-token'] = token;
   };
 };
 
@@ -74,6 +89,30 @@ export const sortWatchlistFilms = (sortBy: string) => {
     dispatch({
       type: ActionType.SORT_WATCHLIST_FILMS,
       payload: sortBy,
+    });
+  };
+};
+
+export const sortByTitle = () => {
+  return (dispatch: Dispatch<WatchlistActions>) => {
+    dispatch({
+      type: ActionType.SORT_BY_TITLE,
+    });
+  };
+};
+
+export const sortByYear = () => {
+  return (dispatch: Dispatch<WatchlistActions>) => {
+    dispatch({
+      type: ActionType.SORT_BY_YEAR,
+    });
+  };
+};
+
+export const sortByDuration = () => {
+  return (dispatch: Dispatch<WatchlistActions>) => {
+    dispatch({
+      type: ActionType.SORT_BY_DURATION,
     });
   };
 };

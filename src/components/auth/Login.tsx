@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import './login.css';
 import { Redirect } from 'react-router-dom';
@@ -8,9 +8,14 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { loginUser } = useActions();
+  const { loginUser, loadUser } = useActions();
 
   const isAuthenticated = useTypedSelector(state => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -7,6 +7,7 @@ interface FilmCardProps {
   year: string;
   poster_path: string;
   overview: string;
+  runtime: number;
 }
 
 const WatchlistFilm = ({
@@ -15,6 +16,7 @@ const WatchlistFilm = ({
   overview,
   poster_path,
   _id,
+  runtime,
 }: FilmCardProps) => {
   const [overviewVisible, setOverviewVisible] = useState(false);
 
@@ -36,7 +38,7 @@ const WatchlistFilm = ({
           onClick={() => setOverviewVisible(!overviewVisible)}
           className="watchlist-item-title"
         >
-          {title} ({year})
+          {title} ({year}) {runtime && <span>({runtime} mins)</span>}
         </h3>
         <button
           value={_id}

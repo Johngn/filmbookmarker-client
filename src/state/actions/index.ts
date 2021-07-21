@@ -83,6 +83,18 @@ interface sortWatchlistFilmsAction {
   payload: string;
 }
 
+interface sortByYearAction {
+  type: ActionType.SORT_BY_YEAR;
+}
+
+interface sortByTitleAction {
+  type: ActionType.SORT_BY_TITLE;
+}
+
+interface sortByDurationAction {
+  type: ActionType.SORT_BY_DURATION;
+}
+
 interface deleteFilmAction {
   type: ActionType.DELETE_FILM;
   payload: string;
@@ -93,7 +105,10 @@ export type WatchlistActions =
   | addFilmAction
   | getWatchlistAction
   | sortWatchlistFilmsAction
-  | deleteFilmAction;
+  | deleteFilmAction
+  | sortByYearAction
+  | sortByTitleAction
+  | sortByDurationAction;
 
 // ALERT ACTIONS
 
