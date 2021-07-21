@@ -1,322 +1,327 @@
 :root {
-    --primary-color: #004455;
-    --secondary-color: #00222a;
-    --tertiary-color: #006580;
+  --primary-color: #004455;
+  --secondary-color: #00222a;
+  --tertiary-color: #006580;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: var(--tertiary-color);
-    font-family: sans-serif;
-    margin: 0;
+  background-color: var(--tertiary-color);
+  font-family: sans-serif;
+  margin: 0;
 }
 
 header {
-    background-color: var(--secondary-color);
-    padding: 0.3rem;
-    display: flex;
-    justify-content: space-between;
+  background-color: var(--secondary-color);
+  padding: 0.3rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .container {
-    max-width: 1300px;
-    margin: auto;
+  max-width: 1300px;
+  margin: auto;
 }
 
 .form-container {
-    width: 400px;
-    margin: auto;
-    margin-top: 8px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+  width: 400px;
+  margin: auto;
+  margin-top: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
 }
 .form {
-    /* margin: 5px 30px; */
-    display: flex;
-    justify-content: space-between;
+  /* margin: 5px 30px; */
+  display: flex;
+  justify-content: space-between;
 }
 
 .search {
-    border: none;
-    background-color: transparent;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    color: #fff;
-    width: 100%;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  width: 100%;
 }
 
 .search-button {
-    background-color: var(--secondary-color);
-    color: #fff;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    height: 40px;
-    border: none;
-    width: 20%;
+  background-color: var(--secondary-color);
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  border: none;
+  width: 20%;
 }
 .search-button:hover {
-    background-color: var(--primary-color);
-    cursor: pointer;
+  background-color: var(--primary-color);
+  cursor: pointer;
 }
 
 .search::placeholder {
-    color: #fff;
+  color: #fff;
 }
 
 .navbar {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    font-size: 20px;
-    padding: 5px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 20px;
+  padding: 5px;
 }
 
 .navbar-link {
-    color: #fff;
-    padding: 5px;
-    margin: 5px;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
 }
 
 .navbar-logout {
-    color: #fff;
-    background-color: transparent;
-    font-size: 20px;
-    border: none;
-    border-bottom: 1px solid #fff;
-    padding: 0;
-    cursor: pointer;
-    margin-right: 5px;
+  color: #fff;
+  background-color: transparent;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  padding: 0;
+  cursor: pointer;
+  margin-right: 5px;
 }
 
 .navbar-logout:hover {
-    color: var(--tertiary-color);
-    border-bottom: 1px solid var(--tertiary-color);
+  color: var(--tertiary-color);
+  border-bottom: 1px solid var(--tertiary-color);
 }
 
 .navbar-link:hover {
-    color: var(--tertiary-color);
+  color: var(--tertiary-color);
 }
 
 #home {
-    display: flex;
-    flex-wrap: wrap;
-    /* align-content: center; */
-    justify-content: center;
-    margin-bottom: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  /* align-content: center; */
+  justify-content: center;
+  margin-bottom: 100px;
 }
 
 .no-films-found-container {
-    color: #fff;
-    font-size: 30px;
-    margin-top: 100px;
+  color: #fff;
+  font-size: 30px;
+  margin-top: 100px;
 }
 
 /* FILMCARD */
 
 .filmcard {
-    width: 400px;
-    height: 290px;
-    margin: 0.5rem;
-    padding: 10px;
-    background-color: var(--primary-color);
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.9);
-    border-radius: 0px;
-    display: flex;
+  width: 400px;
+  height: 290px;
+  margin: 0.5rem;
+  padding: 10px;
+  background-color: var(--primary-color);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.9);
+  border-radius: 0px;
+  display: flex;
 }
 
 .filmcard-left {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .filmcard-image-container {
-    height: 230px;
+  height: 230px;
 }
 
 .filmcard-image {
-    width: 150px;
+  width: 150px;
 }
 .filmcard-no-image {
-    width: 150px;
-    text-align: center;
-    padding-top: 80px;
-    font-size: 25px;
-    color: #fff;
+  width: 150px;
+  text-align: center;
+  padding-top: 80px;
+  font-size: 25px;
+  color: #fff;
 }
 
 .filmcard-info {
-    color: #eee;
+  color: #eee;
 }
 
 .filmcard-title {
-    margin-bottom: 5px;
-    font-size: 14px;
-    display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  display: block;
 }
 
 .filmcard-year {
-    font-size: 14px;
-    margin-bottom: 5px;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .filmcard-add-button {
-    width: 100%;
-    cursor: pointer;
-    height: 40px;
-    background-color: var(--secondary-color);
-    color: #fff;
-    border: none;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  width: 100%;
+  cursor: pointer;
+  height: 40px;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 }
 
 .filmcard-overview {
-    font-size: 12px;
-    overflow: hidden;
+  font-size: 12px;
+  overflow: hidden;
 }
 
 .filmcard-add-button:hover {
-    background-color: var(--tertiary-color);
-    color: #fff;
-    border: none;
+  background-color: var(--tertiary-color);
+  color: #fff;
+  border: none;
 }
 
 /* WATCHLIST */
 
 .narrow-container {
-    max-width: 800px;
-    margin: auto;
+  max-width: 800px;
+  margin: auto;
 }
 
 #watchlist-page {
-    width: 95%;
-    margin-bottom: 200px;
+  width: 95%;
+  margin-bottom: 200px;
 }
 
 .watchlist-heading {
-    text-align: center;
-    color: #fff;
-    margin: 10px;
+  text-align: center;
+  color: #fff;
+  margin: 10px;
 }
 
 .watchlist {
-    color: #fff;
-    list-style-type: none;
+  color: #fff;
+  list-style-type: none;
 }
 .watchlist-list-item {
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
-    background-color: var(--secondary-color);
-    margin-bottom: 10px;
-    padding: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+  background-color: var(--secondary-color);
+  margin-bottom: 10px;
+  padding: 5px;
 }
 .watchlist-item-main {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .watchlist-item-dropdown {
-    display: flex;
+  display: flex;
 }
 
 .watchlist-image {
-    width: 150px;
-    padding: 5px;
+  width: 150px;
+  padding: 5px;
 }
 
 .watchlist-text {
-    padding: 5px;
+  padding: 5px;
 }
 
 .watchlist-item-title {
-    font-size: 18px;
+  font-size: 18px;
 }
 .watchlist-item-title:hover {
-    color: var(--tertiary-color);
+  color: var(--tertiary-color);
 }
 .watchlist-delete-button {
-    height: 80%;
-    border: none;
-    width: 100px;
-    border-radius: 1px;
-    box-shadow: 1px 1px 2px #000;
-    text-transform: uppercase;
-    cursor: pointer;
+  height: 80%;
+  border: none;
+  width: 100px;
+  border-radius: 1px;
+  box-shadow: 1px 1px 2px #000;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 .watchlist-delete-button:hover {
-    background-color: var(--primary-color);
-    color: #fff;
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 .watchlist-item-title {
-    cursor: pointer;
-    margin-left: 10px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
 .watchlist-empty-container {
-    color: #fff;
-    margin-top: 100px;
-    /* max-width: 400px; */
-    text-align: center;
+  color: #fff;
+  margin-top: 100px;
+  /* max-width: 400px; */
+  text-align: center;
 }
 
 .watchlist-button-container {
-    display: flex;
-    width: 100%;
-    margin-bottom: 10px;
-    margin-left: auto;
-    justify-content: flex-end;
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: auto;
+  justify-content: space-between;
 }
 
 .watchlist-button {
-    /* padding: 80px; */
-    border: 1px solid #004455;
-    width: 110px;
-    height: 40px;
-    border-radius: 1px;
-    box-shadow: 1px 1px 2px #000;
-    text-transform: uppercase;
-    cursor: pointer;
+  /* padding: 80px; */
+  border: 1px solid #004455;
+  width: 110px;
+  height: 40px;
+  border-radius: 1px;
+  box-shadow: 1px 1px 2px #000;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .watchlist-button-pressed {
-    background-color: var(--primary-color);
-    color: #fff;
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 .watchlist-button:hover {
-    background-color: #006580;
-    color: #fff;
+  background-color: #006580;
+  color: #fff;
+}
+
+.watchlist-number-of-films-container {
+  color: #fff;
+  font-size: 25px;
 }
 
 /* SPINNER */
 
 .spinner-container {
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ALERT */
 .alert {
-    padding: 2rem;
-    margin: 2rem;
-    background: turquoise;
-    color: #000;
-    text-transform: uppercase;
-    position: fixed;
-    top: 0;
-    right: 0;
+  padding: 2rem;
+  margin: 2rem;
+  background: turquoise;
+  color: #000;
+  text-transform: uppercase;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 .red {
-    background: rgb(206, 0, 0);
-    color: #fff;
+  background: rgb(206, 0, 0);
+  color: #fff;
 }

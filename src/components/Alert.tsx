@@ -1,7 +1,7 @@
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import classNames from 'classnames';
 
-const Alert: React.FC = () => {
+const Alert: any = () => {
   const alerts = useTypedSelector(state => state.alert);
 
   interface AlertType {

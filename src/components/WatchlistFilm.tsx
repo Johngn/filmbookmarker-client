@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
 
 interface FilmCardProps {
@@ -17,6 +17,8 @@ const WatchlistFilm = ({
   _id,
 }: FilmCardProps) => {
   const [overviewVisible, setOverviewVisible] = useState(false);
+
+  useEffect(() => setOverviewVisible(false), [title]);
 
   const { deleteWatchlistFilm } = useActions();
 

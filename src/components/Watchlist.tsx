@@ -39,26 +39,31 @@ const Watchlist = () => {
     <main id="watchlist-page" className="narrow-container">
       <h1 className="watchlist-heading">Watchlist</h1>
       <div className="watchlist-button-container">
-        <button
-          className={classNames(
-            { 'watchlist-button-pressed': sortedByYear },
-            'watchlist-button'
-          )}
-          name="year"
-          onClick={sortWatchlistFilmsComponent}
-        >
-          Sort by year
-        </button>
-        <button
-          className={classNames(
-            { 'watchlist-button-pressed': sortedByTitle },
-            'watchlist-button'
-          )}
-          name="title"
-          onClick={sortWatchlistFilmsComponent}
-        >
-          Sort by title
-        </button>
+        <div className="watchlist-number-of-films-container">
+          {films.length} films
+        </div>
+        <div>
+          <button
+            className={classNames(
+              { 'watchlist-button-pressed': sortedByYear },
+              'watchlist-button'
+            )}
+            name="year"
+            onClick={sortWatchlistFilmsComponent}
+          >
+            Sort by year
+          </button>
+          <button
+            className={classNames(
+              { 'watchlist-button-pressed': sortedByTitle },
+              'watchlist-button'
+            )}
+            name="title"
+            onClick={sortWatchlistFilmsComponent}
+          >
+            Sort by title
+          </button>
+        </div>
       </div>
       {watchlist.loading ? (
         <Spinner />

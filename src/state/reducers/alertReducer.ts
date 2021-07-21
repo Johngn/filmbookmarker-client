@@ -2,8 +2,9 @@ import { ActionType } from '../action-types';
 import { AlertActions } from '../actions';
 
 interface AlertState {
-  id: string;
-  message: string;
+  alertType: string;
+  id: number;
+  msg: string;
 }
 
 const initialState: AlertState[] = [];
