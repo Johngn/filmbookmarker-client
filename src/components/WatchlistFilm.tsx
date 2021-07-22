@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
 
+interface Genre {
+  id: number;
+  name: string;
+}
+
 interface FilmCardProps {
   title: string;
   _id: string;
@@ -8,6 +13,7 @@ interface FilmCardProps {
   poster_path: string;
   overview: string;
   runtime: number;
+  genres: Genre[];
 }
 
 const WatchlistFilm = ({
@@ -17,6 +23,7 @@ const WatchlistFilm = ({
   poster_path,
   _id,
   runtime,
+  genres,
 }: FilmCardProps) => {
   const [overviewVisible, setOverviewVisible] = useState(false);
 
@@ -38,7 +45,7 @@ const WatchlistFilm = ({
           onClick={() => setOverviewVisible(!overviewVisible)}
           className="watchlist-item-title"
         >
-          {title} ({year}) {runtime && <span>({runtime} mins)</span>}
+          {title} ({year}) {runtime && <p>{runtime} mins</p>}
         </h3>
         <button
           value={_id}
@@ -57,7 +64,28 @@ const WatchlistFilm = ({
               alt=""
             ></img>
           </div>
-          <p className="watchlist-text">{overview}</p>
+          <div>
+            <div className="watchlist-text">{overview}</div>
+            {genres && (
+              <div className="watchlist-text">
+                {genres.map((genre, i, genres) => {
+                  if (genres.length === i + 1) {
+                    return (
+                      <span key={genre.id} className="watchlist-genre">
+                        {genre.name}
+                      </span>
+                    );
+                  } else {
+                    return (
+                      <span key={genre.id} className="watchlist-genre">
+                        {genre.name},{' '}
+                      </span>
+                    );
+                  }
+                })}
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         ''

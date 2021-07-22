@@ -29,8 +29,6 @@ export const setAlert = (msg: string, alertType: string): any => {
 
 export const addFilm = (newFilm: any) => {
   return (dispatch: Dispatch<WatchlistActions>) => {
-    console.log(newFilm.id);
-
     const token = axios.defaults.headers.common['x-auth-token'];
     delete axios.defaults.headers.common['x-auth-token']; // This stops CORS error
 
@@ -39,6 +37,7 @@ export const addFilm = (newFilm: any) => {
         `https://api.themoviedb.org/3/movie/${newFilm.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US`
       )
       .then(response => {
+        newFilm.genres = response.data.genres;
         newFilm.runtime = response.data.runtime;
 
         axios
@@ -81,39 +80,6 @@ export const getWatchlistFilms = (userID: string) => {
           payload: res.data,
         });
       });
-  };
-};
-
-export const sortWatchlistFilms = (sortBy: string) => {
-  return (dispatch: Dispatch<WatchlistActions>) => {
-    dispatch({
-      type: ActionType.SORT_WATCHLIST_FILMS,
-      payload: sortBy,
-    });
-  };
-};
-
-export const sortByTitle = () => {
-  return (dispatch: Dispatch<WatchlistActions>) => {
-    dispatch({
-      type: ActionType.SORT_BY_TITLE,
-    });
-  };
-};
-
-export const sortByYear = () => {
-  return (dispatch: Dispatch<WatchlistActions>) => {
-    dispatch({
-      type: ActionType.SORT_BY_YEAR,
-    });
-  };
-};
-
-export const sortByDuration = () => {
-  return (dispatch: Dispatch<WatchlistActions>) => {
-    dispatch({
-      type: ActionType.SORT_BY_DURATION,
-    });
   };
 };
 
