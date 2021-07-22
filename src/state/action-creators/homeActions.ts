@@ -25,7 +25,7 @@ export const getDefaultFilms = () => {
   };
 };
 
-export const searchFilm = (searchTerm: string) => {
+export const searchFilm = (searchTerm: string, searchYear: string) => {
   return async (dispatch: Dispatch<HomeActions>) => {
     dispatch({
       type: ActionType.HOME_LOADING,
@@ -34,8 +34,10 @@ export const searchFilm = (searchTerm: string) => {
     const token = axios.defaults.headers.common['x-auth-token'];
     delete axios.defaults.headers.common['x-auth-token']; // This stops CORS error
 
+    const year = searchYear === '' ? 0 : parseInt(searchYear);
+
     const res = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query="${searchTerm}"`
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&query=${searchTerm}&year=${year}`
     );
 
     axios.defaults.headers.common['x-auth-token'] = token;

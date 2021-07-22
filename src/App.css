@@ -48,7 +48,19 @@ header {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   color: #fff;
-  width: 100%;
+  width: 80%;
+}
+
+.search-year {
+  border: none;
+  border-left: 1px solid var(--primary-color);
+  background-color: transparent;
+  /* border-radius: 5px; */
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  width: 20%;
 }
 
 .search-button {

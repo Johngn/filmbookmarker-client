@@ -3,13 +3,17 @@ import { useActions } from '../hooks/useActions';
 
 const Searchbox: React.FunctionComponent = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [searchYear, setSearchYear] = useState('');
+  const searchTermInputRef = useRef<HTMLInputElement>(null);
   const { searchFilm } = useActions();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (searchTerm !== '' && searchTerm === inputRef.current?.value) {
-        searchFilm(searchTerm);
+      if (
+        searchTerm !== '' &&
+        searchTerm === searchTermInputRef.current?.value
+      ) {
+        searchFilm(searchTerm, searchYear);
       }
     }, 500);
 
@@ -18,20 +22,27 @@ const Searchbox: React.FunctionComponent = () => {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm, inputRef]);
+  }, [searchTerm, searchYear, searchTermInputRef]);
 
   return (
     <div className="form-container">
       <form className="form">
         <input
-          ref={inputRef}
+          ref={searchTermInputRef}
           type="text"
           id="search"
           className="search"
           placeholder="Enter name of film"
           value={searchTerm}
-          // onChange={handleChange}
           onChange={event => setSearchTerm(event.target.value)}
+        />
+        <input
+          type="text"
+          id="search"
+          className="search-year"
+          placeholder="Year"
+          value={searchYear}
+          onChange={event => setSearchYear(event.target.value)}
         />
       </form>
     </div>
