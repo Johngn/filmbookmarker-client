@@ -15,4 +15,5 @@ export enum ActionType {
   USER_LOADED = 'USER_LOADED',
   AUTH_ERROR = 'AUTH_ERROR',
   LOGOUT = 'LOGOUT',
+  LOADING = 'LOADING',
 }

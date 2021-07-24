@@ -5,6 +5,14 @@ import setAuthToken from '../../utils/setAuthToken';
 import { AuthActions } from '../actions';
 import { Dispatch } from 'redux';
 
+export const setLoading = () => {
+  return async (dispatch: Dispatch<AuthActions>) => {
+    dispatch({
+      type: ActionType.LOADING,
+    });
+  };
+};
+
 // Load user
 export const loadUser = (): any => {
   return async (dispatch: Dispatch<AuthActions>) => {

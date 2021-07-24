@@ -35,6 +35,11 @@ const authReducer = (
   const { type, payload } = action;
 
   switch (type) {
+    case ActionType.LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case ActionType.USER_LOADED:
       return {
         ...state,
@@ -49,7 +54,6 @@ const authReducer = (
         ...state,
         ...payload,
         isAuthenticated: true,
-        loading: false,
       };
     case ActionType.REGISTER_FAIL:
     case ActionType.LOGIN_FAIL:
@@ -57,7 +61,6 @@ const authReducer = (
     case ActionType.LOGOUT:
       localStorage.removeItem('token');
       return {
-        ...state,
         token: null,
         isAuthenticated: false,
         loading: false,

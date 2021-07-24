@@ -8,11 +8,12 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { loginUser, loadUser } = useActions();
+  const { loginUser, loadUser, setLoading } = useActions();
 
   const isAuthenticated = useTypedSelector(state => state.auth.isAuthenticated);
 
   useEffect(() => {
+    // setLoading();
     loadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -20,6 +21,7 @@ const Login = () => {
   const loginUserHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setLoading();
     loginUser({ email, password });
   };
 

@@ -54,6 +54,10 @@ interface LogoutAction {
   type: ActionType.LOGOUT;
 }
 
+interface LoadingAction {
+  type: ActionType.LOADING;
+}
+
 export type AuthActions =
   | RegisterSuccessAction
   | RegisterFailAction
@@ -61,7 +65,8 @@ export type AuthActions =
   | LoginFailAction
   | UserLoadedAction
   | AuthErrorAction
-  | LogoutAction;
+  | LogoutAction
+  | LoadingAction;
 
 // WATCHLIST ACTIONS
 
