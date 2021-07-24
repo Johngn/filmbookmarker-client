@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { ActionType } from '../action-types';
-import { HomeActions } from '../actions';
+import { SearchActions } from '../actions';
 import { Dispatch } from 'redux';
 
 export const getDefaultFilms = () => {
-  return async (dispatch: Dispatch<HomeActions>) => {
+  return async (dispatch: Dispatch<SearchActions>) => {
     dispatch({
-      type: ActionType.HOME_LOADING,
+      type: ActionType.SEARCH_LOADING,
     });
 
     const token = axios.defaults.headers.common['x-auth-token'];
@@ -26,9 +26,9 @@ export const getDefaultFilms = () => {
 };
 
 export const searchFilm = (searchTerm: string, searchYear: string) => {
-  return async (dispatch: Dispatch<HomeActions>) => {
+  return async (dispatch: Dispatch<SearchActions>) => {
     dispatch({
-      type: ActionType.HOME_LOADING,
+      type: ActionType.SEARCH_LOADING,
     });
 
     const token = axios.defaults.headers.common['x-auth-token'];

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import homeReducer from './homeReducer';
+import searchReducer from './searchReducer';
 import watchlistReducer from './watchlistReducer';
 import alertReducer from './alertReducer';
 import authReducer from './authReducer';
 
 const reducers = combineReducers({
-  films: homeReducer,
+  films: searchReducer,
   watchlist: watchlistReducer,
   alert: alertReducer,
   auth: authReducer,

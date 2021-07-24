@@ -1,6 +1,6 @@
 import { ActionType } from '../action-types';
 
-// HOME ACTIONS
+// SEARCH ACTIONS
 
 interface DefaultFilmAction {
   type: ActionType.DEFAULT_FILMS;
@@ -12,14 +12,14 @@ interface SearchFilmAction {
   payload: any;
 }
 
-interface HomeLoadingAction {
-  type: ActionType.HOME_LOADING;
+interface SearchLoadingAction {
+  type: ActionType.SEARCH_LOADING;
 }
 
-export type HomeActions =
+export type SearchActions =
   | DefaultFilmAction
   | SearchFilmAction
-  | HomeLoadingAction;
+  | SearchLoadingAction;
 
 // AUTH ACTIONS
 

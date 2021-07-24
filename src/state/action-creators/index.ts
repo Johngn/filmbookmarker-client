@@ -1,3 +1,3 @@
 export * from './authActions';
-export * from './homeActions';
+export * from './searchActions';
 export * from './watchlistActions';

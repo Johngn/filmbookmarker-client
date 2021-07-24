@@ -1,17 +1,20 @@
 import { ActionType } from '../action-types';
-import { HomeActions } from '../actions';
+import { SearchActions } from '../actions';
 
-interface HomeState {
+interface SearchState {
   loading: boolean;
   films: any;
 }
 
-const initialState: HomeState = {
+const initialState: SearchState = {
   loading: false,
   films: [],
 };
 
-const homeReducer = (state = initialState, action: HomeActions): HomeState => {
+const searchReducer = (
+  state = initialState,
+  action: SearchActions
+): SearchState => {
   switch (action.type) {
     case ActionType.DEFAULT_FILMS:
       return {
@@ -25,7 +28,7 @@ const homeReducer = (state = initialState, action: HomeActions): HomeState => {
         films: action.payload,
         loading: false,
       };
-    case ActionType.HOME_LOADING:
+    case ActionType.SEARCH_LOADING:
       return {
         ...state,
         loading: true,
@@ -35,4 +38,4 @@ const homeReducer = (state = initialState, action: HomeActions): HomeState => {
   }
 };
 
-export default homeReducer;
+export default searchReducer;

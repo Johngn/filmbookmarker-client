@@ -118,6 +118,9 @@ const Watchlist = () => {
         }
       })
     );
+    setSortedByTitle(false);
+    setSortedByYear(false);
+    setSortedByDuration(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGenre]);
