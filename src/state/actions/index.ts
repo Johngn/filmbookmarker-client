@@ -74,8 +74,16 @@ interface wathlistLoadingAction {
   type: ActionType.WATCHLIST_LOADING;
 }
 
-interface addFilmAction {
-  type: ActionType.ADD_FILM;
+interface addFilmStartAction {
+  type: ActionType.ADD_FILM_START;
+}
+
+interface addFilmSuccessAction {
+  type: ActionType.ADD_FILM_SUCCESS;
+}
+
+interface addFilmFailureAction {
+  type: ActionType.ADD_FILM_FAILURE;
 }
 
 interface getWatchlistAction {
@@ -90,9 +98,11 @@ interface deleteFilmAction {
 
 export type WatchlistActions =
   | wathlistLoadingAction
-  | addFilmAction
+  | addFilmStartAction
   | getWatchlistAction
-  | deleteFilmAction;
+  | deleteFilmAction
+  | addFilmSuccessAction
+  | addFilmFailureAction;
 
 // ALERT ACTIONS
 

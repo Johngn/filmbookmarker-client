@@ -13,7 +13,6 @@ const Login = () => {
   const isAuthenticated = useTypedSelector(state => state.auth.isAuthenticated);
 
   useEffect(() => {
-    // setLoading();
     loadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

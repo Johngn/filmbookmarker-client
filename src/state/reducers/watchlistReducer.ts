@@ -30,7 +30,19 @@ const watchlistReducer = (
         loading: false,
       };
 
-    case ActionType.ADD_FILM:
+    case ActionType.ADD_FILM_START:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case ActionType.ADD_FILM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case ActionType.ADD_FILM_FAILURE:
       return {
         ...state,
         loading: false,

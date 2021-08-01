@@ -29,6 +29,10 @@ export const setAlert = (msg: string, alertType: string): any => {
 
 export const addFilm = (newFilm: any) => {
   return (dispatch: Dispatch<WatchlistActions>) => {
+    dispatch({
+      type: ActionType.ADD_FILM_START,
+    });
+
     const token = axios.defaults.headers.common['x-auth-token'];
     delete axios.defaults.headers.common['x-auth-token']; // This stops CORS error
 
@@ -50,12 +54,15 @@ export const addFilm = (newFilm: any) => {
           .then(res => {
             if (res.status === 200) {
               dispatch({
-                type: ActionType.ADD_FILM,
+                type: ActionType.ADD_FILM_SUCCESS,
               });
               dispatch(setAlert('Film added to watchlist', 'success'));
             }
           })
           .catch(() => {
+            dispatch({
+              type: ActionType.ADD_FILM_FAILURE,
+            });
             dispatch(setAlert('Film already on watchlist', 'failure'));
           });
       });

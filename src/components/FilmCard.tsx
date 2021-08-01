@@ -1,4 +1,7 @@
+import classNames from 'classnames';
+
 import { useActions } from '../hooks/useActions';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 interface FilmCardProps {
   title: string;
@@ -16,8 +19,9 @@ const FilmCard = ({
   release_date,
 }: FilmCardProps) => {
   const { addFilm } = useActions();
+  const loading = useTypedSelector(state => state.watchlist.loading);
 
-  const addToList = (e: any) => {
+  const addToList = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const newFilm = {
@@ -45,7 +49,14 @@ const FilmCard = ({
             <div className="filmcard-no-image">No poster found</div>
           )}
         </div>
-        <button className="filmcard-add-button" onClick={addToList}>
+        <button
+          disabled={loading}
+          className={classNames(
+            { 'filmcard-add-button-loading': loading },
+            'filmcard-add-button'
+          )}
+          onClick={addToList}
+        >
           ADD TO WATCHLIST
         </button>
       </div>
