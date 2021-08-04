@@ -25,6 +25,12 @@ const Search = () => {
 
   return (
     <div className="container">
+      <div>
+        <p className="search-text">
+          Search for films using the search box, and then add them to your
+          watchlist.
+        </p>
+      </div>
       <Searchbox />
       <main id="home">
         {films.loading ? (

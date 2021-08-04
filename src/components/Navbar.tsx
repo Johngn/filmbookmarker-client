@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <header>
       <nav className="navbar container">
-        {isAuthenticated ? (
+        {/* {isAuthenticated ? (
           <div>
             <Link className="navbar-link" to="/">
               Search
@@ -21,16 +21,28 @@ const Navbar = () => {
           </div>
         ) : (
           ''
-        )}
+        )} */}
+
+        <Link className="navbar-title-link" to="/">
+          <h2 className="navbar-title">Filmmarker</h2>
+        </Link>
 
         {isAuthenticated ? (
-          <div>
-            <button onClick={logout} className="navbar-logout">
-              Logout
-            </button>
-          </div>
+          <>
+            <div>
+              <Link className="navbar-link" to="/">
+                Search
+              </Link>
+              <Link className="navbar-link" to="/watchlist">
+                Watchlist
+              </Link>
+              <button onClick={logout} className="navbar-logout">
+                Logout
+              </button>
+            </div>
+          </>
         ) : (
-          <div style={{ marginLeft: 'auto' }}>
+          <div>
             <Link className="navbar-link" to="/register">
               Register
             </Link>
