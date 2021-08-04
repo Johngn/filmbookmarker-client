@@ -111,6 +111,12 @@ header {
   font-size: 24px;
 }
 
+@media (max-width: 550px) {
+  .navbar-title {
+    display: none;
+  }
+}
+
 .navbar-title-link {
   text-decoration: none;
 }
@@ -372,6 +378,30 @@ header {
 .watchlist-genre-option {
   text-align: center;
   color: #fff;
+}
+
+@media (max-width: 550px) {
+  .watchlist-button {
+    /* padding: 80px; */
+    border: 1px solid #004455;
+    width: 55px;
+    height: 40px;
+    font-size: 10px;
+    border-radius: 1px;
+    box-shadow: 1px 1px 2px #000;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .watchlist-number-of-films-container {
+    color: #fff;
+    font-size: 22px;
+  }
+
+  .watchlist-genre-select {
+    font-size: 10px;
+    width: 100px;
+  }
 }
 
 /* SPINNER */
