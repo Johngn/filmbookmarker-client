@@ -28,7 +28,7 @@ const Search = () => {
       <div>
         <p className="search-text">
           Search for films using the search box, and then add them to your
-          watchlist.
+          watchlist
         </p>
       </div>
       <Searchbox />
