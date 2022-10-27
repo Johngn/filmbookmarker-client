@@ -7,6 +7,9 @@ module.exports = function (app) {
       target: "https://filmmarker-backend.up.railway.app/",
       // target: "http://localhost:5000/",
       changeOrigin: true,
+      onProxyRes: response => {
+        response.headers["access-control-allow-origin"] = "*";
+      },
     })
   );
 };
