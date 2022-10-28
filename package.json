@@ -37,8 +37,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "set \"INLINE_RUNTIME_CHUNK=false\" npm run build",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

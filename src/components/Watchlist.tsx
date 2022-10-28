@@ -126,10 +126,10 @@ const Watchlist = () => {
   }, [selectedGenre]);
 
   return (
-    <main id="watchlist-page" className="narrow-container">
-      <p className="search-text">
+    <main id="watchlist-page" className="watchlist-page">
+      {/* <p className="search-text">
         Use the options to filter and sort your watchlist
-      </p>
+      </p> */}
       <div className="watchlist-button-container">
         <div className="watchlist-number-of-films-container">
           {filteredFilms.length} films

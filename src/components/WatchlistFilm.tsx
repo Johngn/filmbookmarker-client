@@ -25,9 +25,9 @@ const WatchlistFilm = ({
   runtime,
   genres,
 }: FilmCardProps) => {
-  const [overviewVisible, setOverviewVisible] = useState(false);
+  const [overviewVisible, setOverviewVisible] = useState(true);
 
-  useEffect(() => setOverviewVisible(false), [title]);
+  useEffect(() => setOverviewVisible(true), [title]);
 
   const { deleteWatchlistFilm } = useActions();
 
@@ -40,21 +40,6 @@ const WatchlistFilm = ({
 
   return (
     <li className="watchlist-list-item">
-      <div className="watchlist-item-main">
-        <h3
-          onClick={() => setOverviewVisible(!overviewVisible)}
-          className="watchlist-item-title"
-        >
-          {title} ({year}) {runtime && <p>{runtime} mins</p>}
-        </h3>
-        <button
-          value={_id}
-          onClick={deleteWatchlistFilmHandler}
-          className="watchlist-delete-button"
-        >
-          Remove
-        </button>
-      </div>
       {overviewVisible ? (
         <div className="watchlist-item-dropdown">
           <div className="watchlist-image-container">
@@ -64,10 +49,26 @@ const WatchlistFilm = ({
               alt=""
             ></img>
           </div>
-          <div>
+
+          <div className="watchlist-right">
+            <div className="watchlist-item-main">
+              <h3
+                // onClick={() => setOverviewVisible(!overviewVisible)}
+                className="watchlist-item-title"
+              >
+                {title} ({year}) {runtime && <p>{runtime} mins</p>}
+              </h3>
+              <button
+                value={_id}
+                onClick={deleteWatchlistFilmHandler}
+                className="watchlist-delete-button"
+              >
+                R
+              </button>
+            </div>
             <div className="watchlist-text">{overview}</div>
             {genres && (
-              <div className="watchlist-text">
+              <div className="watchlist-genres">
                 {genres.map((genre, i, genres) => {
                   if (genres.length === i + 1) {
                     return (
@@ -78,7 +79,7 @@ const WatchlistFilm = ({
                   } else {
                     return (
                       <span key={genre.id} className="watchlist-genre">
-                        {genre.name},{' '}
+                        {genre.name}
                       </span>
                     );
                   }
