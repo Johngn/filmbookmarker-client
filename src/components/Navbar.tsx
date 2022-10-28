@@ -23,14 +23,14 @@ const Navbar = () => {
           ''
         )} */}
 
-        <Link className="navbar-title-link" to="/">
+        <Link className="navbar-title-link" to="/watchlist">
           <h2 className="navbar-title">Filmmarker</h2>
         </Link>
 
         {isAuthenticated ? (
           <>
             <div>
-              <Link className="navbar-link" to="/">
+              <Link className="navbar-link" to="/search">
                 Search
               </Link>
               <Link className="navbar-link" to="/watchlist">
