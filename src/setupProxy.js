@@ -5,7 +5,7 @@ module.exports = function (app) {
     "/api",
     createProxyMiddleware({
       target: "https://filmmarker-backend.up.railway.app/",
-      // target: "http://localhost:5000/",
+      // target: process.env.REACT_APP_PROXY,
       changeOrigin: true,
       onProxyRes: response => {
         response.headers["access-control-allow-origin"] = "*";
