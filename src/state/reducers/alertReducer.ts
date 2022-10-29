@@ -1,5 +1,5 @@
-import { ActionType } from "../action-types";
-import { AlertActions } from "../actions";
+import { ActionType } from '../action-types';
+import { AlertActions } from '../actions';
 
 interface AlertState {
   alertType: string;
@@ -19,9 +19,7 @@ const alertReducer = (
     case ActionType.SET_ALERT:
       return [...state, payload];
     case ActionType.REMOVE_ALERT:
-      return state.filter(
-        (alert: AlertState) => alert.id !== parseInt(payload)
-      );
+      return [];
     default:
       return state;
   }

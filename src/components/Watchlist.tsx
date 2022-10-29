@@ -121,7 +121,11 @@ const Watchlist = () => {
               All
             </option>
             {genresArray.map(genre => (
-              <option className="watchlist-genre-option" value={genre}>
+              <option
+                key={genre}
+                className="watchlist-genre-option"
+                value={genre}
+              >
                 {genre}
               </option>
             ))}

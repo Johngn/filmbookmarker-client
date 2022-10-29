@@ -22,11 +22,10 @@ export const setAlert = (msg: string, alertType: string): any => {
 
     setTimeout(
       () => dispatch({ type: ActionType.REMOVE_ALERT, payload: id }),
-      1000
+      3000
     );
   };
 };
-
 export const addFilm = (newFilm: any) => {
   return (dispatch: Dispatch<WatchlistActions>) => {
     dispatch({
