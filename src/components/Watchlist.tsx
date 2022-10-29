@@ -4,6 +4,7 @@ import WatchlistFilm from './WatchlistFilm';
 import Spinner from './Spinner';
 import classNames from 'classnames';
 import { useActions } from '../hooks/useActions';
+import { genresArray } from '../utils/constants';
 
 const Watchlist = () => {
   interface Genres {
@@ -19,7 +20,6 @@ const Watchlist = () => {
     runtime: number;
     year: any;
   }
-  const [genres, setGenres] = useState<Genres[]>([]);
   const [selectedGenre, setSelectedGenre] = useState('all');
   const watchlist = useTypedSelector(state => state.watchlist);
   const user = useTypedSelector(state => state.auth.user);
@@ -88,32 +88,12 @@ const Watchlist = () => {
   };
 
   useEffect(() => {
-    setFilteredFilms(watchlist.films);
-
-    const genres = watchlist.films.map((film: any) => film.genres);
-
-    const genresFlattened = genres.flat();
-
-    const removeDuplicateObjectFromArray = (
-      genresFlattened: any,
-      key: string
-    ) => {
-      const check = new Set();
-      return genresFlattened.filter(
-        (obj: any) => !check.has(obj[key]) && check.add(obj[key])
-      );
-    };
-
-    setGenres(removeDuplicateObjectFromArray(genresFlattened, 'name'));
-  }, [watchlist.films]);
-
-  useEffect(() => {
     setFilteredFilms(
-      watchlist.films.filter((film: any) => {
-        const genreNames = film.genres.map((genre: any) => genre.name);
-        if (selectedGenre === 'all') {
+      watchlist.films?.filter((film: any) => {
+        const genreNames = film.genres?.map((genre: any) => genre.name);
+        if (genreNames && selectedGenre === 'all') {
           return film;
-        } else {
+        } else if (genreNames) {
           return genreNames.includes(selectedGenre);
         }
       })
@@ -127,9 +107,6 @@ const Watchlist = () => {
 
   return (
     <main id="watchlist-page" className="watchlist-page">
-      {/* <p className="search-text">
-        Use the options to filter and sort your watchlist
-      </p> */}
       <div className="watchlist-button-container">
         <div className="watchlist-number-of-films-container">
           {filteredFilms.length} films
@@ -142,14 +119,9 @@ const Watchlist = () => {
             <option value="all" className="watchlist-genre-option">
               All
             </option>
-            {genres.map(genre => (
-              <option
-                className="watchlist-genre-option"
-                value={genre.name}
-                key={genre.id}
-                id={genre.name}
-              >
-                {genre.name}
+            {genresArray.map(genre => (
+              <option className="watchlist-genre-option" value={genre}>
+                {genre}
               </option>
             ))}
           </select>
