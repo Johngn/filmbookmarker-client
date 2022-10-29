@@ -277,7 +277,7 @@ header {
   flex-direction: column;
 }
 .watchlist-item-main {
-  /* height: 50px; */
+  justify-content: space-between;
   width: 100%;
   display: flex;
 }
