@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
+import { FaRegTrashAlt } from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 
 interface Genre {
   id: number;
@@ -63,7 +65,11 @@ const WatchlistFilm = ({
                 onClick={deleteWatchlistFilmHandler}
                 className="watchlist-delete-button"
               >
-                R
+                <IconContext.Provider
+                  value={{ color: '#cc0000', size: '1.5em' }}
+                >
+                  <FaRegTrashAlt />
+                </IconContext.Provider>
               </button>
             </div>
             <div className="watchlist-text">{overview}</div>

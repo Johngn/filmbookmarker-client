@@ -329,9 +329,9 @@ header {
   border: none;
   width: 30px;
   border-radius: 10px;
-  box-shadow: 1px 1px 2px #000;
   text-transform: uppercase;
   cursor: pointer;
+  background: none;
 }
 .watchlist-delete-button:hover {
   background-color: var(--primary-color);
