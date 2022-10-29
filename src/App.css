@@ -291,11 +291,14 @@ header {
 }
 
 .watchlist-text {
-  padding: 5px;
+  padding-left: 5px;
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 110px;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+  -webkit-box-orient: vertical;
 }
 
 .watchlist-genres {
