@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useActions } from '../hooks/useActions';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
+import rottenTomatoes from '../images/rottentomatoes.png';
+import metacritic from '../images/metacritic.png';
 
 interface Genre {
   id: number;
@@ -16,6 +18,7 @@ interface FilmCardProps {
   overview: string;
   runtime: number;
   genres: Genre[];
+  ratings: [{ Source: string; Value: string }];
 }
 
 const WatchlistFilm = ({
@@ -26,6 +29,7 @@ const WatchlistFilm = ({
   _id,
   runtime,
   genres,
+  ratings,
 }: FilmCardProps) => {
   const [overviewVisible, setOverviewVisible] = useState(true);
 
@@ -93,6 +97,58 @@ const WatchlistFilm = ({
                     );
                   }
                 })}
+              </div>
+            )}
+            {ratings && (
+              <div className="ratings-container">
+                <div className="rating">
+                  <img
+                    src="http://icons.iconarchive.com/icons/danleech/simple/1024/imdb-icon.png"
+                    width="40px"
+                    height="30px"
+                    alt="IMDB"
+                  />
+                  <div>
+                    {ratings.filter(
+                      rating => rating.Source === 'Internet Movie Database'
+                    ).length > 0 &&
+                      ratings.filter(
+                        rating => rating.Source === 'Internet Movie Database'
+                      )[0].Value}
+                  </div>
+                </div>
+                <div className="rating">
+                  <img
+                    src={rottenTomatoes}
+                    width="25px"
+                    height="30px"
+                    alt="Rotten Tomatoes"
+                  />
+                  <div>
+                    {ratings.filter(
+                      rating => rating.Source === 'Rotten Tomatoes'
+                    ).length > 0 &&
+                      ratings.filter(
+                        rating => rating.Source === 'Rotten Tomatoes'
+                      )[0].Value}
+                  </div>
+                </div>
+                <div className="rating">
+                  <img
+                    className="metacritic"
+                    src={metacritic}
+                    width="30px"
+                    height="30px"
+                    alt="Metacritic"
+                  />
+                  <div>
+                    {ratings.filter(rating => rating.Source === 'Metacritic')
+                      .length > 0 &&
+                      ratings.filter(
+                        rating => rating.Source === 'Metacritic'
+                      )[0].Value}
+                  </div>
+                </div>
               </div>
             )}
           </div>

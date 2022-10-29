@@ -1,9 +1,13 @@
 import { ActionType } from '../action-types';
 import axios from 'axios';
 import { v4 as uuid } from 'uuid';
+import UUID from 'uuid-int';
 import { AlertActions } from '../actions';
 import { WatchlistActions } from '../actions';
 import { Dispatch } from 'redux';
+
+const id = 0;
+const generator = UUID(id);
 
 export const setWatchlistLoading = (): WatchlistActions => {
   return {
@@ -36,12 +40,23 @@ export const addFilm = (newFilm: any) => {
     delete axios.defaults.headers.common['x-auth-token']; // This stops CORS error
 
     axios
+      // .get(
+      //   `https://api.themoviedb.org/3/movie/${newFilm.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US`
+      // )
       .get(
-        `https://api.themoviedb.org/3/movie/${newFilm.id}?api_key=${process.env.REACT_APP_THEMOVIEDB_API_KEY}&language=en-US`
+        `//www.omdbapi.com/?t=${newFilm.title.split(' ').join('+')}&y=${
+          newFilm.year
+        }&apikey=${process.env.REACT_APP_OMDB_API_KEY}`
       )
-      .then(response => {
-        newFilm.genres = response.data.genres;
-        newFilm.runtime = response.data.runtime;
+      .then(({ data }) => {
+        if (data.Response === 'True') {
+          newFilm.genres = data.Genre.split(', ').map((genre: string) => ({
+            id: generator.uuid(),
+            name: genre,
+          }));
+          newFilm.runtime = parseInt(data.Runtime.split(' ')[0]);
+          newFilm.ratings = data.Ratings;
+        }
 
         axios
           .post('/api/films', newFilm, {

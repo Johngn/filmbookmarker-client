@@ -357,7 +357,7 @@ header {
 
 .watchlist-button-container {
   display: flex;
-  width: 100%;
+  width: 95%;
   margin: 10px auto;
   /* margin-left: auto; */
   justify-content: space-between;
@@ -409,6 +409,21 @@ header {
 .watchlist-genre-option {
   text-align: center;
   color: #fff;
+}
+
+.ratings-container {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.rating {
+  font-size: 14px;
+  text-align: center;
+  width: 33%;
+}
+
+.metacritic {
+  background-color: transparent;
 }
 
 @media (max-width: 550px) {

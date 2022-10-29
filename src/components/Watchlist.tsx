@@ -19,6 +19,7 @@ const Watchlist = () => {
     genres: Genres[];
     runtime: number;
     year: any;
+    ratings: [{ Source: string; Value: string }];
   }
   const [selectedGenre, setSelectedGenre] = useState('all');
   const watchlist = useTypedSelector(state => state.watchlist);
@@ -174,6 +175,7 @@ const Watchlist = () => {
               runtime={film.runtime}
               key={film._id}
               genres={film.genres}
+              ratings={film.ratings}
             />
           ))}
         </ul>
