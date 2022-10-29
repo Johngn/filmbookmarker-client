@@ -10,19 +10,6 @@ const Navbar = () => {
   return (
     <header>
       <nav className="navbar container">
-        {/* {isAuthenticated ? (
-          <div>
-            <Link className="navbar-link" to="/">
-              Search
-            </Link>
-            <Link className="navbar-link" to="/watchlist">
-              Watchlist
-            </Link>
-          </div>
-        ) : (
-          ''
-        )} */}
-
         <Link className="navbar-title-link" to="/watchlist">
           <h2 className="navbar-title">Filmmarker</h2>
         </Link>
@@ -46,7 +33,7 @@ const Navbar = () => {
             <Link className="navbar-link" to="/register">
               Register
             </Link>
-            <Link className="navbar-link" to="/login">
+            <Link className="navbar-link" to="/">
               Login
             </Link>
           </div>
