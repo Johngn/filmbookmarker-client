@@ -96,6 +96,7 @@ const Watchlist = () => {
         } else if (genreNames) {
           return genreNames.includes(selectedGenre);
         }
+        return film;
       })
     );
     setSortedByTitle(false);
