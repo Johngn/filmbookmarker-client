@@ -10,4 +10,4 @@ export const genresArray = [
   'Comedy',
   'Fantasy',
   'Adventure',
-];
+].sort();

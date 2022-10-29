@@ -89,7 +89,7 @@ const Watchlist = () => {
 
   useEffect(() => {
     setFilteredFilms(
-      watchlist.films?.filter((film: any) => {
+      watchlist.films.filter((film: any) => {
         const genreNames = film.genres?.map((genre: any) => genre.name);
         if (genreNames && selectedGenre === 'all') {
           return film;
@@ -102,9 +102,7 @@ const Watchlist = () => {
     setSortedByTitle(false);
     setSortedByYear(false);
     setSortedByDuration(false);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGenre]);
+  }, [selectedGenre, watchlist]);
 
   return (
     <main id="watchlist-page" className="watchlist-page">

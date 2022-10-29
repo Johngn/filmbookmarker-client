@@ -259,6 +259,7 @@ header {
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
 }
 .watchlist-list-item {
