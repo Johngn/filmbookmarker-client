@@ -321,6 +321,12 @@ header {
   margin: 5px;
   /* cursor: pointer; */
 }
+.watchlist-film-year {
+  font-weight: 100;
+}
+.watchlist-film-runtime {
+  font-weight: 400;
+}
 .watchlist-item-title:hover {
   /* color: var(--tertiary-color); */
 }

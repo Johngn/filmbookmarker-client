@@ -58,7 +58,10 @@ const WatchlistFilm = ({
                 // onClick={() => setOverviewVisible(!overviewVisible)}
                 className="watchlist-item-title"
               >
-                {title} ({year}) {runtime && <p>{runtime} mins</p>}
+                {title} <span className="watchlist-film-year">({year})</span>{' '}
+                {runtime && (
+                  <p className="watchlist-film-runtime">{runtime} mins</p>
+                )}
               </h3>
               <button
                 value={_id}
