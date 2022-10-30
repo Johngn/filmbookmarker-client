@@ -6,8 +6,10 @@ export const genresArray = [
   'Thriller',
   'History',
   'Crime',
-  'Science Fiction',
+  'Sci-Fi',
   'Comedy',
   'Fantasy',
   'Adventure',
+  'Biography',
+  'Romance',
 ].sort();
